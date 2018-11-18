@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import {uploadImage} from './utils/Api';
+import { uploadImage } from './utils/Api';
 
+//TODO: get rid of croppedImage, simply set imageSelected when getting result from backend
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       file: '',
-      imageSelected: ''
+      imageSelected: '',
+      croppedImage:''
     };
     this._handleImageChange = this._handleImageChange.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
@@ -16,10 +18,16 @@ class App extends Component {
 
   render() {
     let { imageSelected } = this.state;
+    let { croppedImage } = this.state;
     let $imagePreviewDiv = null;
+    let $croppedImagePreviewDiv = null;
 
     if (imageSelected) {
-      $imagePreviewDiv = (<img className="image" src={imageSelected} height="70%" width="70%" />);
+      $imagePreviewDiv = (<img className="image" src={imageSelected} height="70%" width="70%" alt="preview" />);
+    }
+
+    if (croppedImage) {
+      $croppedImagePreviewDiv = (<img className="image" src={croppedImage} height="70%" width="70%" alt="Cropped Preview" />);
     }
 
     return (
@@ -34,6 +42,9 @@ class App extends Component {
             <div >
               {$imagePreviewDiv}
             </div>
+            <div >
+              {$croppedImagePreviewDiv}
+            </div>
           </div>
         </header>
       </div>
@@ -43,7 +54,15 @@ class App extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
-    uploadImage(this.state.file);
+    uploadImage(this.state.file)
+    .then(res => {
+        this.setState({
+        croppedImage: res.data
+        });
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
   }
 
   _handleImageChange(e) {

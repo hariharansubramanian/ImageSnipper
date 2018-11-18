@@ -8,5 +8,6 @@ export const uploadImage = (file) => {
     return axios.post(`${BASE_URL}/api/images/`, formData, {
       headers: { 'Content-Type': 'multipart/form-data' }
     });
+  
 
 }

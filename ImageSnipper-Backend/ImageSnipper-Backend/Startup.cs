@@ -64,6 +64,7 @@ namespace ImageSnipper_Backend
             });
 
             app.UseMvc();
+            app.UseCors("MyPolicy");
         }
     }
 }
