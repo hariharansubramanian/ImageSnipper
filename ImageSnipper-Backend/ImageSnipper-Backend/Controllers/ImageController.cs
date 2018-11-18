@@ -45,7 +45,7 @@ namespace ImageSnipper_Backend.Controllers
                     await file.CopyToAsync(fs);
                 }
 
-                var croppedImage = ScriptService.ExecuteScript(_environment, _configuration, imageName);
+                var croppedImage = ScriptService.ExecutePythonScript(_environment, _configuration, imageName);
                 return Content(croppedImage);
             }
             catch (Exception e)

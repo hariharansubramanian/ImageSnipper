@@ -4,17 +4,31 @@ import numpy as np
 
 
 def do_work(src_path, dest_path):
-    im = cv2.imread(src_path)
-    im = crop_black_borders(im)
-    cv2.imwrite(dest_path, im)
+    image = cv2.imread(src_path)
+    image = crop_black_borders(image, 80)  # set tolerance
+    cv2.imwrite(dest_path, image)
 
-def crop_black_borders(im):
-    # do your work here
-    print("doing work here")
-    return im
+
+def crop_black_borders(image, tolerance):
+    if len(image.shape) == 3:
+        flat_img = np.max(image, 2)
+    else:
+        flat_img = image
+    assert len(flat_img.shape) == 2
+
+    rows = np.where(np.max(flat_img, 0) > tolerance)[0]
+    if rows.size:
+        cols = np.where(np.max(flat_img, 1) > tolerance)[0]
+        image = image[cols[0]: cols[-1] + 1, rows[0]: rows[-1] + 1]
+    else:
+        image = image[:1, :1]
+
+    return image
+
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description='Cuts black border of an image given as argument and saves it as another image whose path is also given as argument')
+    parser = argparse.ArgumentParser(
+        description='Cuts black border of an image given as argument and saves it as another image whose path is also given as argument')
     parser.add_argument("src_path", help="Full path to the source image.")
     parser.add_argument("dest_path", help="Full path to the result image.")
     args = parser.parse_args()
