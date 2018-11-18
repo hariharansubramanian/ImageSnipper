@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {uploadImage} from './utils/Api';
 
 class App extends Component {
   constructor(props) {
@@ -13,33 +14,12 @@ class App extends Component {
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  _handleSubmit(e) {
-    e.preventDefault();
-    // TODO: do something with -> this.state.file
-  }
-
-  _handleImageChange(e) {
-    e.preventDefault();
-
-    let reader = new FileReader();
-    let file = e.target.files[0];
-
-    reader.onloadend = () => {
-      this.setState({
-        file: file,
-        imageSelected: reader.result
-      });
-    }
-
-    reader.readAsDataURL(file)
-  }
-
   render() {
     let { imageSelected } = this.state;
     let $imagePreviewDiv = null;
 
     if (imageSelected) {
-      $imagePreviewDiv = (<img src={imageSelected} height="70%" width="70%" />);
+      $imagePreviewDiv = (<img className="image" src={imageSelected} height="70%" width="70%" />);
     }
 
     return (
@@ -59,6 +39,25 @@ class App extends Component {
       </div>
 
     )
+  }
+
+  _handleSubmit(e) {
+    e.preventDefault();
+    uploadImage(this.state.file);
+  }
+
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imageSelected: reader.result
+      });
+    }
+    reader.readAsDataURL(file)
   }
 
 }
