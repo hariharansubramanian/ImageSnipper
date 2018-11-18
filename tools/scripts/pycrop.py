@@ -4,9 +4,10 @@ import numpy as np
 
 
 def do_work(src_path, dest_path):
-    image = cv2.imread(src_path)
-    image = crop_black_borders(image, 80)  # set tolerance
-    cv2.imwrite(dest_path, image)
+    image = cv2.imread(src_path)  # reads original image from src_path
+    image = crop_black_borders(image, 0)  # crop black borders using a tolerance value
+    cv2.imwrite(dest_path, image)  # creates cropped image into dest_path
+    print('Cropped image saved in: ' + dest_path)
 
 
 def crop_black_borders(image, tolerance):

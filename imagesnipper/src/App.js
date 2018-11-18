@@ -3,31 +3,34 @@ import logo from './logo.svg';
 import './App.css';
 import { uploadImage } from './utils/Api';
 
-//TODO: get rid of croppedImage, simply set imageSelected when getting result from backend
+//TODO: get rid of croppedImageUrl, simply set imageSelectedUrl when getting result from backend
 class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
       file: '',
-      imageSelected: '',
-      croppedImage:''
+      imageSelectedUrl: '',
+      croppedImageUrl: ''
     };
     this._handleImageChange = this._handleImageChange.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
   render() {
-    let { imageSelected } = this.state;
-    let { croppedImage } = this.state;
-    let $imagePreviewDiv = null;
+    let { imageSelectedUrl } = this.state;
+    let { croppedImageUrl } = this.state;
+
+    let $imageSelectedDiv = null;
     let $croppedImagePreviewDiv = null;
 
-    if (imageSelected) {
-      $imagePreviewDiv = (<img className="image" src={imageSelected} height="70%" width="70%" alt="preview" />);
+    // if image selected from explorer window, show div, else remains null
+    if (imageSelectedUrl) {
+      $imageSelectedDiv = (<img className="image" src={imageSelectedUrl} height="50%" width="50%" alt="preview" />);
     }
 
-    if (croppedImage) {
-      $croppedImagePreviewDiv = (<img className="image" src={croppedImage} height="70%" width="70%" alt="Cropped Preview" />);
+    // if croppedImageUrl returned from backend POST request, show div, else remains null
+    if (croppedImageUrl) {
+      $croppedImagePreviewDiv = (<img className="image" src={croppedImageUrl} height="50%" width="50%" alt="Cropped Preview" />);
     }
 
     return (
@@ -37,13 +40,15 @@ class App extends Component {
           <div>
             <form onSubmit={this._handleSubmit}>
               <input type="file" onChange={this._handleImageChange} />
-              <button type="submit" disabled={!$imagePreviewDiv} onClick={this._handleSubmit}>Crop Border</button>
+              <button type="submit" disabled={!$imageSelectedDiv} onClick={this._handleSubmit}>Crop Border</button>
             </form>
-            <div >
-              {$imagePreviewDiv}
-            </div>
-            <div >
-              {$croppedImagePreviewDiv}
+            <div className="preview">
+              <div className="imageSelected">
+                {$imageSelectedDiv}
+              </div>
+              <div className="croppedImage">
+                {$croppedImagePreviewDiv}
+              </div>
             </div>
           </div>
         </header>
@@ -54,10 +59,12 @@ class App extends Component {
 
   _handleSubmit(e) {
     e.preventDefault();
+    // send POST request with formdata containing image
     uploadImage(this.state.file)
-    .then(res => {
+      .then(res => {
+        // upon success, set croppedImageUrl, and setState to re-render and show div
         this.setState({
-        croppedImage: res.data
+          croppedImageUrl: res.data
         });
       })
       .catch(function (error) {
@@ -73,7 +80,8 @@ class App extends Component {
     reader.onloadend = () => {
       this.setState({
         file: file,
-        imageSelected: reader.result
+        imageSelectedUrl: reader.result,
+        croppedImageUrl: null // clear any previously previewing cropped images
       });
     }
     reader.readAsDataURL(file)
