@@ -10,6 +10,7 @@ def do_work(src_path, dest_path):
 
 def crop_black_borders(im):
     # do your work here
+    print("doing work here")
     return im
 
 if __name__ == "__main__":
