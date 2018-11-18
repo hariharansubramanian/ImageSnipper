@@ -1,2 +1,2 @@
 # ImageSnipper
-A full-stack (REACT - C# MVC) project which lets you upload pictures from your PC or the web that have borders and returns back the image without a border (using a python script at the back end)
+A full-stack (REACT - C# MVC) project which lets you upload pictures from your PC or the web, which have borders,processes this image on the backend, using a python openCV script, and returns the image to the REACT app without the border.
