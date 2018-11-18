@@ -15,7 +15,7 @@ namespace ImageSnipper_Backend.Utils
 {
     public static class ScriptService
     {
-        public static string ExecuteCroppingScript(IHostingEnvironment environment, IConfiguration configuration, string image)
+        public static string ExecutePythonScript(IHostingEnvironment environment, IConfiguration configuration, string image)
         {
             var projectRoot = new DirectoryInfo(environment.ContentRootPath).Parent.Parent.FullName;
             var sourceDir = Path.Combine(environment.WebRootPath, configuration.GetValue<string>("ImagesPath:Uploaded"));
