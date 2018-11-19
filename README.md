@@ -44,9 +44,6 @@ To download all the nuget packages and start your webserver, navigate into Image
 >cd ImageSnipper-Backend\ImageSnipper-Backend
 >dotnet run
 ```
-1 - Make sure your React app and MVC web app's are up and running
-2 - Navigate to 
-Your web-server will now be up and running on http://localhost:51422/ 
 
 The MVC project is configured to use Swagger, and serves it on the default page.
 
