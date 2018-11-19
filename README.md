@@ -54,7 +54,7 @@ Simply go to http://localhost:51421/ on your browser, and it should auto-navigat
 
 You can now interact and view the different API's built into the MVC system
 
-![Alt text](readme-assets/swagger-api-ui.png?raw=true "Swagger-UI")
+![Alt text](https://github.com/hariharansubramanian/ImageSnipper/blob/master/readme-assets/swagger-api-ui.PNG)
 
 ## Using the app
 
@@ -67,7 +67,7 @@ You can now interact and view the different API's built into the MVC system
 3 - Hit 'Crop Border'
 
 
-![Alt text](readme-assets/cropping-in-action.png?raw=true "Front-end")
+![Alt text](https://github.com/hariharansubramanian/ImageSnipper/blob/master/readme-assets/cropping-in-action.PNG)
 
 ## Built With
 
