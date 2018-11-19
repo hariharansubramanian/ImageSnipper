@@ -10,13 +10,13 @@ These instructions will get you a copy of the project up and running on your loc
 
 You will need the following packages to get started
 
-* [Git](https://git-scm.com/downloads) - The web framework used
-* [Python](https://www.python.org/downloads/) - Dependency Management
-* OpenCv (pip install opencv-python) - Used to generate RSS Feeds
-* NumPy (pip install numpy) - Used to generate RSS Feeds
-* [Dotnet core](https://www.microsoft.com/net/download) - Used to generate RSS Feeds
-* [Node](https://nodejs.org/en/download/) - Used to generate RSS Feeds
-* [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable) - Used to generate RSS Feeds
+* [Git](https://git-scm.com/downloads)
+* [Python](https://www.python.org/downloads/)
+* OpenCv (pip install opencv-python) 
+* NumPy (pip install numpy)
+* [Dotnet core](https://www.microsoft.com/net/download)
+* [Node](https://nodejs.org/en/download/)
+* [Yarn](https://yarnpkg.com/lang/en/docs/install/#windows-stable)
 
 ### Clone this project
 
@@ -71,9 +71,9 @@ You can now interact and view the different API's built into the MVC system
 
 ## Built With
 
-* [Visual Studio Code](https://code.visualstudio.com/) - The web framework used
-* [Visual Studio](https://visualstudio.microsoft.com/) - Dependency Management
-* [PyCharm](https://www.jetbrains.com/pycharm/) - Used to generate RSS Feeds
+* [Visual Studio Code](https://code.visualstudio.com/) 
+* [Visual Studio](https://visualstudio.microsoft.com/) 
+* [PyCharm](https://www.jetbrains.com/pycharm/) 
 
 ## Authors
 
